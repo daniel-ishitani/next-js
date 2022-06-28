@@ -1,0 +1,7 @@
+{
+  "posts": [
+    { "slug": "first", "content": "first post" },
+    { "slug": "second", "content": "second post" },
+    { "slug": "third", "content": "third post" }
+  ]
+}
