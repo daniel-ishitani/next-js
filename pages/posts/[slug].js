@@ -1,16 +1,12 @@
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import data from '../../data.json';
 
 export async function getStaticPaths() {
-  const paths = data.posts.map(post => ({
-    params: { slug: post.slug },
-  }));
-
   return {
-    paths,
-    fallback: false // false or 'blocking'
+    paths: [],
+    fallback: 'blocking' // false or 'blocking'
   };
 }
 
@@ -19,11 +15,16 @@ export async function getStaticProps(context) {
 
   return {
     props: post,
-  }
+    revalidate: 10,
+  };
 }
 
 function Post(props) {
-  // const router = useRouter();
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <p>Loading...</p>;
+  };
 
   return (
     <div>
